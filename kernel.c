@@ -52,7 +52,24 @@ void kernel(unsigned n, float a[n][n], const float b[n][n], float x) {
     }
 }
 
+/*#elif defined (OPT4)
+#include <math.h>
+#include <omp.h>
 
+void kernel(unsigned n, float a[n][n], const float b[n][n], float x) {
+    unsigned i, j, k;
+    float log_x = log(x); // Calcul unique de log(x)
+    #pragma omp parallel for
+    for (j = 0; j < n; j++) {
+        for (i = 0; i < n; i++) {
+        float sum = 0.0f;
+            for (k = 0; k < 6; k++) {
+                sum += log_x * b[k][j];
+            }
+        a[i][j] += sum;
+        }
+    }
+}*/
 #else
 
 /* original */

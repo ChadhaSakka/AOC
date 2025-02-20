@@ -1,16 +1,16 @@
 CC=gcc
-CFLAGS=-O2 -march=native -g -funroll-loops -fopenmp -ffast-math -Wall
-OPTFLAGS=-O3 -march=native -g -funroll-loops -fopenmp -ffast-math -Wall
+CFLAGS=-O2 -march=native -g -funroll-loops -fopenmp -ffast-math -lpthread -Wall
+OPTFLAGS=-O3 -march=native -g -funroll-loops -fopenmp -ffast-math -lpthread -Wall
 OBJS_COMMON=kernel.o rdtsc.o
 
 all:	check calibrate measure
 
 check:	$(OBJS_COMMON) driver_check.o
-	$(CC) -o $@ $^ -lm
+	$(CC) -o $@ $^ -lm 
 calibrate: $(OBJS_COMMON) driver_calib.o
-	$(CC) -o $@ $^ -lm
+	$(CC) -o $@ $^ -lm 
 measure: $(OBJS_COMMON) driver.o
-	$(CC) -o $@ $^ -lm
+	$(CC) -o $@ $^ -lm fopenmp
 
 driver_check.o: driver_check.c
 	$(CC) $(CFLAGS) -D CHECK -c $< -o $@
