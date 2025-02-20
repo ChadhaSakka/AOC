@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-O2 -march=x86-64 -g -funroll-loops -Wall
-OPTFLAGS=-O3 -march=x86-64 -g -Wall -fopenmp
+CFLAGS=-O2 -march=native -g -funroll-loops -fopenmp -Wall
+OPTFLAGS=-O3 -march=native -g -funroll-loops -fopenmp -Wall
 OBJS_COMMON=kernel.o rdtsc.o
 
 all:	check calibrate measure
