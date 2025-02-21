@@ -5,7 +5,6 @@
 void kernel(unsigned n, float a[n][n], const float b[n][n], float x) {
     unsigned i, j, k;
     float log_x = log(x); // Calcul unique de log(x)
-
     for (j = 0; j < n; j++) {
         for (i = 0; i < n; i++) {
        #pragma omp simd
@@ -73,18 +72,13 @@ void kernel(unsigned n, float a[n][n], const float b[n][n], float x) {
 #else
 
 /* original */
-#include <math.h>
 
+#include <math.h>
 void kernel(unsigned n, float a[n][n], const float b[n][n], float x) {
     unsigned i, j, k;
-    float log_x = log(x); // Calcul unique de log(x)
-
-    for (j = 0; j < n; j++) {
-        for (i = 0; i < n; i++) {
-            for (k = 0; k < 6; k++) {
-                a[i][j] += log_x * b[k][j];
-            }
-        }
-    }
+    for (j = 0; j < n; j++)
+        for (i = 0; i < n; i++)
+            for (k = 0; k < 6; k++)
+                a[i][j] += log(x) * b[k][j];
 }
 #endif
