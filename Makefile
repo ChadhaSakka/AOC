@@ -10,7 +10,7 @@ check:	$(OBJS_COMMON) driver_check.o
 calibrate: $(OBJS_COMMON) driver_calib.o
 	$(CC) -o $@ $^ -lm 
 measure: $(OBJS_COMMON) driver.o
-	$(CC) -o $@ $^ -lm fopenmp
+	$(CC) -o $@ $^ -lm
 
 driver_check.o: driver_check.c
 	$(CC) $(CFLAGS) -D CHECK -c $< -o $@
