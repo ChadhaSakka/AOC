@@ -6,11 +6,11 @@ OBJS_COMMON=kernel.o rdtsc.o
 all:	check calibrate measure
 
 check:	$(OBJS_COMMON) driver_check.o
-	$(CC) -o $@ $^ -lm 
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 calibrate: $(OBJS_COMMON) driver_calib.o
-	$(CC) -o $@ $^ -lm 
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 measure: $(OBJS_COMMON) driver.o
-	$(CC) -o $@ $^ -lm
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 driver_check.o: driver_check.c
 	$(CC) $(CFLAGS) -D CHECK -c $< -o $@
@@ -24,3 +24,4 @@ kernel.o: kernel.c
 
 clean:
 	rm -rf $(OBJS_COMMON) driver_check.o driver_calib.o driver.o check calibrate measure
+	
